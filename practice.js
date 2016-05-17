@@ -1,7 +1,7 @@
 //We're in a job interview. Answer the following questions (try to not look at your notes unless you have to).
   // 1) What is the purpose of the 'this keyword'?
 
-      //Answer
+      //Answer to refer to an object
 
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
@@ -9,11 +9,11 @@
 
   // 3) What is the difference between call and apply?
 
-      //Answer
+      //Answer call just has arguments that are passed afterwards wher apply on has two params the first is the obj the second is an array with the other params
 
   // 4) What does .bind do?
 
-      //Answer
+      //Answer point to the object that the this refers to
 
 
 //Next Problem
@@ -24,11 +24,19 @@
   //getUsername --> which is a function that returns the current object's username property. *Don't use 'user' instead use the 'this' keyword*
 
     //Code Here
+    var user = {
+      username: "stringGuy1337",
+      email: "aString@string.com",
+      getUsername: function () {
+        return this.username;
+      }
+    }
 
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
 
 
 //Next Problem
+user.getUsername();
 
 
 // Write the function definitions which will make the following function invocations function properly.
@@ -55,6 +63,15 @@ var getYear = function(){
 
 //Note(no tests)
   //Code Here
+  function Car(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.move = 0;
+    this.moveCar = function () {
+      return this.move += 10;
+    }.bind(this);
+  }
 
 
 //New Problem
@@ -71,14 +88,14 @@ var getMyUsername = function(){
   console.log(this.username);
 };
 
-setTimeout(getMyUsername, 5000);
+setTimeout(getMyUsername.call(myUser), 5000);
 
 //Above you're given an object, a function, and a setTimeout invocation. After 5 seconds, what will the getUsername function return?
 //Note(no tests)
-  //Answer Here
+  //Answer Here some error. the "this" in the function references the global object;
 
 //In the example above, what is the 'this keyword' bound to when getUsername runs?
 
-  //Answer Here
+  //Answer Here the global object
 
 //Fix the setTimeout invocation so that the user object will be the focal object when getUsername is ran.
